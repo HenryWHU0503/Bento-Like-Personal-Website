@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <style>
+    .bg { fill: #f3f4f6; }
+    .frame { stroke: #d1d5db; }
+    .icon { fill: #9ca3af; }
+    .label { fill: #6b7280; font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif; font-size: 26px; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1f2937; }
+      .frame { stroke: #4b5563; }
+      .icon { fill: #6b7280; }
+      .label { fill: #9ca3af; }
+    }
+  </style>
+  <rect class="bg" width="800" height="600"/>
+  <rect class="frame" x="14" y="14" width="772" height="572" fill="none" stroke-width="3" stroke-dasharray="18 12" rx="18"/>
+  <g class="icon" transform="translate(336, 196) scale(0.25)">
+    <path d="M448 80c8.8 0 16 7.2 16 16V415.8l-5-6.5-136-176c-4.5-5.9-11.6-9.3-19-9.3s-14.4 3.4-19 9.3L202 352l-69.5-92.9c-4.5-6-11.7-9.6-19.2-9.6-7.6 0-14.8 3.6-19.3 9.7L48 328V96c0-8.8 7.2-16 16-16H448zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
+  </g>
+  <text class="label" x="400" y="380" text-anchor="middle">4:3 图片占位</text>
+</svg>
