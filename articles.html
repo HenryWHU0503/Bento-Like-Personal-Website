@@ -1,215 +1,98 @@
-<!DOCTYPE html>
-<html lang="zh-cn" class="light">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
     <title>文章阅读 | 小胡同学</title>
-    <!-- 引入 Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入网页头像 -->
-    <link rel="icon" href="asset/小胡透明.png">
-    <!-- 引入 Font Awesome -->
-    <link href="https://lib.baomitu.com/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
-    <!-- 引入 Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 引入自定义样式 -->
+    <meta name="description" content="探索我的思考、笔记和创作">
+    <link rel="icon" href="asset/avatar.webp">
+    <script src="asset/theme.js"></script>
     <link rel="stylesheet" href="asset/styles.css">
-    <style>
-        /* 文章块 hover 效果与全站 bento-card 完全一致（上浮 + 阴影），
-           .article-item 类仅作为搜索脚本的选取标记，无附加样式 */
-
-        /* 搜索框样式：使用全站 CSS 变量，跟随站内深浅色切换 */
-        .search-input {
-            transition: all 0.3s ease;
-            background-color: var(--card-bg);
-            border: 2px solid var(--border-color);
-            color: var(--text-color);
-        }
-
-        .search-input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-input::placeholder {
-            color: var(--muted-color);
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 768px) {
-            .search-container {
-                padding: 0 1rem;
-            }
-
-            .articles-list {
-                padding: 0 1rem;
-            }
-        }
-    </style>
+    <script src="asset/script.js" defer></script>
+    <script src="asset/glass.js" defer></script>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 搜索区域 -->
-        <div class="mb-8 search-container">
-            <a href="javascript:history.back()" class="inline-flex items-center text-primary font-medium text-sm hover:underline"><i class="fa-solid fa-arrow-left ml-1" aria-hidden="true"></i>&nbsp;返回上一页</a>
-            <h1 class="text-3xl md:text-4xl font-bold mb-4">文章阅读</h1>
-            <p class="text-muted mb-6">探索我的思考、笔记和创作</p>
-            
-            <div class="relative">
-                <input 
-                    type="text" 
-                    id="search-input" 
-                    class="search-input w-full px-5 py-3 rounded-xl focus:outline-none"
-                    placeholder="搜索文章标题..."
-                >
-                <button id="search-btn" class="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-muted hover:text-primary transition-colors">
-                    <i class="fa-solid fa-search"></i>
-                </button>
-                <button id="clear-btn" class="hidden absolute right-12 top-1/2 -translate-y-1/2 p-2 text-muted hover:text-primary transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+    <a class="skip-link" href="#content">跳转到内容</a>
+    <div class="site-shell">
+        <aside class="sidebar">
+            <a class="brand" href="index.html">
+                <img src="asset/avatar.webp" alt="" width="42" height="42">
+                <span class="brand-text"><strong>小胡同学</strong><small>Henry Hu</small></span>
+            </a>
+            <button type="button" class="icon-button menu-toggle" aria-label="更多链接" aria-controls="nav-extras" aria-expanded="false">
+                <svg class="icon" aria-hidden="true"><use href="asset/icons.svg#menu"></use></svg>
+            </button>
+            <nav class="site-nav" aria-label="主导航">
+                <div class="nav-group nav-primary">
+                    <span class="nav-group-title">浏览</span>
+                    <a class="nav-link" href="index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#home"></use></svg><span>主页</span></a>
+                    <a class="nav-link" href="articles.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#articles"></use></svg><span>文章</span></a>
+                    <a class="nav-link" href="project/index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#projects"></use></svg><span>项目</span></a>
+                    <a class="nav-link" href="friends/index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#friends"></use></svg><span>友友们</span></a>
+                </div>
+                <div class="nav-group nav-extras" id="nav-extras">
+                    <span class="nav-group-title">更多</span>
+                    <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#blog"></use></svg><span>博客</span><svg class="icon external-icon" aria-hidden="true"><use href="asset/icons.svg#external"></use></svg></a>
+                    <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#compass"></use></svg><span>开往</span><svg class="icon external-icon" aria-hidden="true"><use href="asset/icons.svg#external"></use></svg></a>
+                    <a class="nav-link" href="en/index.html" hreflang="en" lang="en"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#language"></use></svg><span>English</span></a>
+                </div>
+            </nav>
+            <div class="theme-row">
+                <label class="theme-control">
+                    <svg class="icon" aria-hidden="true"><use href="asset/icons.svg#theme"></use></svg><span>外观</span><svg class="icon chevron" aria-hidden="true"><use href="asset/icons.svg#chevron"></use></svg>
+                    <select id="theme-select" aria-label="外观">
+                        <option value="system">自动</option>
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                    </select>
+                </label>
             </div>
+        </aside>
+
+        <div class="content">
+            <main id="content" tabindex="-1">
+                <header class="page-heading">
+                    <h1>文章阅读</h1>
+                    <p>探索我的思考、笔记和创作</p>
+                </header>
+
+                <form class="article-search" id="article-search" role="search" hidden>
+                    <label class="visually-hidden" for="search-input">搜索文章</label>
+                    <input id="search-input" type="search" placeholder="搜索文章标题或简介" autocomplete="off" aria-controls="articles-list">
+                    <button class="icon-button" type="button" id="clear-search" aria-label="清空搜索" hidden><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#close"></use></svg></button>
+                    <button class="icon-button" type="submit" aria-label="搜索"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#search"></use></svg></button>
+                </form>
+                <div class="bento-grid" id="articles-list">
+                    <a class="bento-card article-item" href="https://blog.henrywhu.cn/post/1year-anniversary/">
+                        <div class="card-heading">
+                            <h2 class="card-title">“或许它会继续给世界带来关怀和爱”</h2>
+                            <span class="reading-time">3 分钟阅读</span>
+                        </div>
+                        <p class="article-meta"><time datetime="2025-09-13">2025.09.13</time> · 博客周年纪念日回顾</p>
+                    </a>
+                    <a class="bento-card article-item" href="https://blog.henrywhu.cn/post/niuniu/">
+                        <div class="card-heading">
+                            <h2 class="card-title">阅读札记｜生命本来没有名字</h2>
+                            <span class="reading-time">5 分钟阅读</span>
+                        </div>
+                        <p class="article-meta"><time datetime="2025-07-07">2025.07.07</time> · 读书心得分享</p>
+                    </a>
+                    <a class="bento-card article-item" href="https://blog.henrywhu.cn/post/yi-ge-fu-du-sheng-de-zi-bai/">
+                        <div class="card-heading">
+                            <h2 class="card-title">一个复读生的自白</h2>
+                            <span class="reading-time">15 分钟阅读</span>
+                        </div>
+                        <p class="article-meta"><time datetime="2025-06-17">2025.06.17</time> · 个人成长经历</p>
+                    </a>
+                    <div class="bento-card article-empty" id="no-results" role="status" hidden>没有找到相关文章，试试其他关键词。</div>
+                </div>
+            </main>
+            <footer class="site-footer">
+                <p>© 2024–2026 Henry Hu</p>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">渝ICP备2024036203号</a>
+            </footer>
         </div>
-
-        <!-- 文章列表 -->
-        <div class="space-y-4 articles-list" id="articles-list">
-            <!-- 文章 1 -->
-            <a href="https://blog.henrywhu.cn/post/1year-anniversary/" class="block bento-card article-item p-6 rounded-2xl hover:shadow-lg transition-all">
-                <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">"或许它会继续给世界带来关怀和爱"</h2>
-                    <span class="text-xs text-muted px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700">
-                        <i class="fa-regular fa-clock mr-1"></i>3 min read
-                    </span>
-                </div>
-                <p class="text-sm text-muted">2025.09.13 · 博客周年纪念日回顾</p>
-            </a>
-
-            <!-- 文章 2 -->
-            <a href="https://blog.henrywhu.cn/post/niuniu/" class="block bento-card article-item p-6 rounded-2xl hover:shadow-lg transition-all">
-                <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">阅读札记｜生命本来没有名字</h2>
-                    <span class="text-xs text-muted px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700">
-                        <i class="fa-regular fa-clock mr-1"></i>5 min read
-                    </span>
-                </div>
-                <p class="text-sm text-muted">2025.07.07 · 读书心得分享</p>
-            </a>
-
-            <!-- 文章 3 -->
-            <a href="https://blog.henrywhu.cn/post/yi-ge-fu-du-sheng-de-zi-bai/" class="block bento-card article-item p-6 rounded-2xl hover:shadow-lg transition-all">
-                <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">一个复读生的自白</h2>
-                    <span class="text-xs text-muted px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700">
-                        <i class="fa-regular fa-clock mr-1"></i>15 min read
-                    </span>
-                </div>
-                <p class="text-sm text-muted">2025.06.17 · 个人成长经历</p>
-            </a>
-
-            <!-- 更多占位文章 -->
-            <div class="block bento-card p-6 rounded-2xl opacity-60">
-                <div class="flex justify-between items-start mb-2">
-                    <h2 class="text-xl font-semibold text-muted">更多内容陆续更新中...</h2>
-                </div>
-                <p class="text-sm text-muted">敬请期待</p>
-            </div>
-        </div>
-
-        <!-- 空状态提示 -->
-        <div id="no-results" class="hidden text-center py-12">
-            <i class="fa-regular fa-folder-open text-6xl text-muted mb-4"></i>
-            <h3 class="text-xl font-semibold mb-2">没有找到相关文章</h3>
-            <p class="text-muted">试试其他关键词或者返回首页看看</p>
-        </div>
-
-        <!-- 页脚 -->
-        <footer class="text-center text-muted py-4">
-            <p><a href="https://beian.miit.gov.cn/" target="_blank">渝ICP备2024036203号</a><br>&copy; 2024-2026 Henry Hu. All rights reserved.</p>
-        </footer>
     </div>
-
-    <!-- 自定义脚本 -->
-    <script src="asset/script.js"></script>
-    <script>
-    // 文章搜索功能
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.getElementById('search-input');
-        const searchBtn = document.getElementById('search-btn');
-        const clearBtn = document.getElementById('clear-btn');
-        const articlesList = document.getElementById('articles-list');
-        const noResults = document.getElementById('no-results');
-        let currentArticles = [];
-
-        // 保存原始文章列表
-        const allArticles = Array.from(articlesList.querySelectorAll('.article-item'));
-
-        // 搜索函数
-        function searchArticles(query) {
-            const lowerQuery = query.toLowerCase().trim();
-            
-            if (!lowerQuery) {
-                showAllArticles();
-                return;
-            }
-
-            let hasResults = false;
-            
-            allArticles.forEach(article => {
-                const title = article.querySelector('h2').textContent.toLowerCase();
-                const desc = article.querySelector('p').textContent.toLowerCase();
-                
-                if (title.includes(lowerQuery) || desc.includes(lowerQuery)) {
-                    article.style.display = 'block';
-                    hasResults = true;
-                } else {
-                    article.style.display = 'none';
-                }
-            });
-
-            // 显示空状态
-            noResults.classList.toggle('hidden', hasResults);
-        }
-
-        // 显示所有文章
-        function showAllArticles() {
-            allArticles.forEach(article => {
-                article.style.display = 'block';
-            });
-            noResults.classList.add('hidden');
-        }
-
-        // 搜索按钮点击事件
-        searchBtn.addEventListener('click', () => {
-            searchArticles(searchInput.value);
-        });
-
-        // 回车键搜索
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchArticles(searchInput.value);
-            }
-        });
-
-        // 清空按钮点击事件
-        clearBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            showAllArticles();
-            clearBtn.classList.add('hidden');
-            searchInput.focus();
-        });
-
-        // 监听输入
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.trim();
-            clearBtn.classList.toggle('hidden', !query);
-        });
-
-        // 移动端触摸支持
-        searchBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            searchArticles(searchInput.value);
-        }, { passive: false });
-    });
-    </script>
 </body>
 </html>

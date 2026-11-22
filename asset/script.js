@@ -1,143 +1,121 @@
-// 深色模式切换功能
-document.addEventListener('DOMContentLoaded', function() {
-    const html = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    
-    // 检查用户偏好或保存的设置
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        html.classList.add('dark');
-    } else {
-        html.classList.remove('dark');
-    }
-    
-    // 切换主题（页面没有切换按钮时跳过，避免中断后续逻辑）
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                html.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
-        });
-    }
+const menuToggle = document.querySelector('.menu-toggle');
+const sidebar = document.querySelector('.sidebar');
+const wideLayout = matchMedia('(min-width: 760px)');
 
-    // 添加卡片动画效果
-    const bentoCards = document.querySelectorAll('.bento-card');
-    bentoCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-4px)';
-            this.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = 'none';
-        });
-    });
+function setMenu(open) {
+    menuToggle.setAttribute('aria-expanded', String(open));
+    sidebar.classList.toggle('is-open', open);
+}
 
-    // 平滑滚动
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+sidebar.classList.add('has-menu-toggle');
+
+menuToggle.addEventListener('click', () => {
+    setMenu(menuToggle.getAttribute('aria-expanded') === 'false');
+});
+wideLayout.addEventListener('change', () => setMenu(false));
+
+document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuToggle.focus();
+    }
+});
+document.addEventListener('click', event => {
+    if (!sidebar.contains(event.target)) setMenu(false);
 });
 
-// ===== 月之暗面官网同款自定义光标 =====
-// 外圈 36px 圆环 + 5px 内点，双层 lerp 缓动跟随；
-// 悬停链接/按钮时外圈放大至 56px；仅在带精确指针（鼠标）的设备启用。
-(function initCustomCursor() {
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+const qrDialog = document.getElementById('wechat-dialog');
+if (qrDialog) {
+    const qrLink = document.querySelector('[data-wechat]');
+    if (typeof qrDialog.showModal === 'function') qrLink.setAttribute('aria-haspopup', 'dialog');
+    qrLink.addEventListener('click', event => {
+        if (typeof qrDialog.showModal !== 'function' || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        qrDialog.showModal();
+    });
+    qrDialog.addEventListener('click', event => {
+        if (event.target === qrDialog) qrDialog.close();
+    });
+}
 
-    const ring = document.createElement('div');
-    ring.className = 'ms-cursor-ring';
-    const dot = document.createElement('div');
-    dot.className = 'ms-cursor-dot';
-    document.body.appendChild(ring);
-    document.body.appendChild(dot);
+const searchForm = document.getElementById('article-search');
+if (searchForm) {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    const empty = document.getElementById('no-results');
+    const articles = Array.from(document.querySelectorAll('.article-item'));
 
-    // 启用自定义光标时隐藏系统光标
-    const hideNative = document.createElement('style');
-    hideNative.textContent = '* { cursor: none !important; }';
-    document.head.appendChild(hideNative);
-
-    const hoverTargets = 'a[href], button, input, textarea, select, [data-cursor-hover]';
-    const speed = 0.2;
-    const ringKeep = 1 - speed;                  // 外圈缓动系数
-    const dotKeep = 1 - Math.min(4 * speed, 0.8); // 内点更快
-    const epsilon = 0.5;
-
-    const target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const ringPos = { x: target.x, y: target.y };
-    const dotPos = { x: target.x, y: target.y };
-    let last = performance.now();
-    let rafId = 0;
-    let visible = false;
-
-    function frame() {
-        const now = performance.now();
-        const dt = 60 * (now - last) / 1000; // 帧率无关
-        last = now;
-
-        const rf = 1 - Math.pow(ringKeep, dt);
-        ringPos.x += (target.x - ringPos.x) * rf;
-        ringPos.y += (target.y - ringPos.y) * rf;
-        ring.style.translate = ringPos.x + 'px ' + ringPos.y + 'px 0';
-
-        const df = 1 - Math.pow(dotKeep, dt);
-        dotPos.x += (target.x - dotPos.x) * df;
-        dotPos.y += (target.y - dotPos.y) * df;
-        dot.style.translate = dotPos.x + 'px ' + dotPos.y + 'px 0';
-
-        const settled =
-            Math.abs(target.x - ringPos.x) < epsilon && Math.abs(target.y - ringPos.y) < epsilon &&
-            Math.abs(target.x - dotPos.x) < epsilon && Math.abs(target.y - dotPos.y) < epsilon;
-        rafId = settled ? 0 : requestAnimationFrame(frame);
-    }
-
-    function onMouseMove(e) {
-        target.x = e.clientX;
-        target.y = e.clientY;
-        if (!rafId) {
-            last = performance.now();
-            rafId = requestAnimationFrame(frame);
+    function filterArticles() {
+        const query = searchInput.value.trim().toLowerCase();
+        let found = false;
+        for (const article of articles) {
+            const matches = article.textContent.toLowerCase().includes(query);
+            article.hidden = !matches;
+            found ||= matches;
         }
-        if (!visible) {
-            visible = true;
-            ringPos.x = dotPos.x = target.x;
-            ringPos.y = dotPos.y = target.y;
-            ring.style.opacity = '1';
-            dot.style.opacity = '1';
-        }
+        empty.hidden = found;
+        clearButton.hidden = searchInput.value.length === 0;
     }
 
-    function onMouseLeave() {
-        visible = false;
-        ring.style.opacity = '0';
-        dot.style.opacity = '0';
+    searchForm.addEventListener('submit', event => {
+        event.preventDefault();
+        filterArticles();
+    });
+    searchInput.addEventListener('input', event => {
+        if (!event.isComposing) filterArticles();
+    });
+    searchInput.addEventListener('compositionend', filterArticles);
+    clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        filterArticles();
+        searchInput.focus();
+    });
+    searchForm.hidden = false;
+    filterArticles();
+}
+
+const precisePointer = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+for (const card of document.querySelectorAll('.bento-card')) {
+    card.addEventListener('pointermove', event => {
+        if (!precisePointer.matches || event.pointerType === 'touch') return;
+        const bounds = card.getBoundingClientRect();
+        card.style.setProperty('--shine-x', `${event.clientX - bounds.left}px`);
+        card.style.setProperty('--shine-y', `${event.clientY - bounds.top}px`);
+    }, { passive: true });
+}
+
+const comments = document.getElementById('tcomment');
+if (comments) {
+    function showCommentError() {
+        document.getElementById('comment-status').hidden = false;
     }
 
-    function onMouseOver(e) {
-        if (e.target.closest(hoverTargets)) ring.classList.add('is-hover');
+    function loadComments() {
+        const script = document.createElement('script');
+        script.src = 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/twikoo/1.6.37/twikoo.min.js';
+        script.onerror = showCommentError;
+        script.onload = async () => {
+            try {
+                await window.twikoo.init({
+                    envId: 'https://twikoo.henrywhu.cn',
+                    el: '#tcomment',
+                    region: 'ap-shanghai',
+                });
+            } catch {
+                showCommentError();
+            }
+        };
+        document.head.append(script);
     }
 
-    function onMouseOut(e) {
-        const from = e.target.closest(hoverTargets);
-        if (from && !(e.relatedTarget && from.contains(e.relatedTarget))) {
-            ring.classList.remove('is-hover');
-        }
+    if (typeof IntersectionObserver === 'undefined') {
+        loadComments();
+    } else {
+        const observer = new IntersectionObserver(entries => {
+            if (!entries.some(entry => entry.isIntersecting)) return;
+            observer.disconnect();
+            loadComments();
+        }, { rootMargin: '220px' });
+        observer.observe(comments);
     }
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseleave', onMouseLeave);
-    document.addEventListener('mouseover', onMouseOver);
-    document.addEventListener('mouseout', onMouseOut);
-})();
+}

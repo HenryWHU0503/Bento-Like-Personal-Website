@@ -1,167 +1,120 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
     <title>Henry Moreau</title>
-    <!-- 引入Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入网页头像 -->
-    <link rel="icon" href="../asset/小胡透明.png">
-    <!-- 引入Font Awesome -->
-    <link href="https://lib.baomitu.com/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
-    <!-- 引入Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 引入自定义样式 -->
+    <meta name="description" content="Student, Designer &amp; Developer">
+    <link rel="icon" href="../asset/avatar.webp">
+    <script src="../asset/theme.js"></script>
     <link rel="stylesheet" href="../asset/styles.css">
+    <script src="../asset/script.js" defer></script>
+    <script src="../asset/glass.js" defer></script>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 顶部和菜单固定区域 -->
-        <div class="header-menu-wrapper">
-            <!-- 顶部区域 -->
-            <header class="mb-8 flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center mb-4 md:mb-0">
-                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary mr-4">
-                    <img src="../asset/小胡.png" alt="Profile picture" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold">Henry Moreau</h1>
-                    <p class="text-muted">Student, Designer & Developer</p>
-                </div>
-            </div>
-            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 transition-colors">
-                <i class="fa-solid fa-moon dark:hidden text-gray-800 text-sm" aria-hidden="true"></i>
-                <i class="fa-solid fa-sun dark:inline-block text-gray-800 text-sm" aria-hidden="true"></i>   
+    <a class="skip-link" href="#content">Skip to content</a>
+    <div class="site-shell">
+        <aside class="sidebar">
+            <a class="brand" href="index.html">
+                <img src="../asset/avatar.webp" alt="" width="42" height="42">
+                <span class="brand-text"><strong>Henry Moreau</strong></span>
+            </a>
+            <button type="button" class="icon-button menu-toggle" aria-label="More links" aria-controls="nav-extras" aria-expanded="false">
+                <svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#menu"></use></svg>
             </button>
-        </header>
+            <nav class="site-nav" aria-label="Main navigation">
+                <div class="nav-group nav-primary">
+                    <span class="nav-group-title">Browse</span>
+                    <a class="nav-link" href="index.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#home"></use></svg><span>Home</span></a>
+                    <a class="nav-link" href="../articles.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#articles"></use></svg><span>Articles</span></a>
+                    <a class="nav-link" href="../project/index.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg><span>Projects</span></a>
+                    <a class="nav-link" href="../friends/index.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#friends"></use></svg><span>Friends</span></a>
+                </div>
+                <div class="nav-group nav-extras" id="nav-extras">
+                    <span class="nav-group-title">Explore</span>
+                    <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#blog"></use></svg><span>Blog</span><svg class="icon external-icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                    <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#compass"></use></svg><span>Travellings</span><svg class="icon external-icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                    <a class="nav-link" href="../index.html" hreflang="zh-CN" lang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#language"></use></svg><span>简体中文</span></a>
+                </div>
+            </nav>
+            <div class="theme-row">
+                <label class="theme-control">
+                    <svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#theme"></use></svg><span>Appearance</span><svg class="icon chevron" aria-hidden="true"><use href="../asset/icons.svg#chevron"></use></svg>
+                    <select id="theme-select" aria-label="Appearance">
+                        <option value="system">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </label>
+            </div>
+        </aside>
 
-        <!-- 菜单区域 -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" id="menu">
-            <a href="#" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-home mr-2" aria-hidden="true"></i>
-                <span>Home</span>
-            </a>
-            <a href="../blog/index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-pen-fancy mr-2" aria-hidden="true"></i>
-                <span>Blog (Chinese)</span>
-            </a>
-            <a href="https://travellings.cn/go.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all" target="_blank">
-                <i class="fa-solid fa-bus mr-2" aria-hidden="true"></i>
-                <span>Travelling</span>
-            </a>
-            <a href="../index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-globe mr-2" aria-hidden="true"></i>
-                <span>Language</span>
-            </a>
+        <div class="content">
+            <main id="content" tabindex="-1">
+                <header class="page-heading">
+                    <h1>Henry Moreau</h1>
+                    <p>Student, Designer &amp; Developer</p>
+                </header>
+
+                <div class="bento-grid project-grid">
+                    <article class="bento-card project-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg>CDUTCM Navigation</h2>
+                        <div class="project-media">
+                            <img src="../asset/nav.png" width="668" height="502" alt="CDUTCM Navigation screenshot" decoding="async">
+                        </div>
+                        <p class="card-copy">Built with Vue.js. Opening it in WeChat supports quick sign-in to CDUTCM services.</p>
+                        <div class="card-actions">
+                            <a class="action-link" href="https://nav.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                            <a class="action-link" href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" rel="noopener noreferrer">View source<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                        </div>
+                    </article>
+                    <article class="bento-card project-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg>Mobile IDE</h2>
+                        <div class="project-media">
+                            <img src="../asset/ide.png" width="1441" height="1080" alt="Mobile IDE screenshot" decoding="async">
+                        </div>
+                        <p class="card-copy">Built with React.js, with code completion and live preview for mobile development.</p>
+                        <div class="card-actions">
+                            <a class="action-link" href="https://ide.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                        </div>
+                    </article>
+                    <section class="bento-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#tags"></use></svg>Skills &amp; Hobbies</h2>
+                        <ul class="chip-list">
+                            <li>UI/UX Design</li>
+                            <li>AI</li>
+                            <li>Site Development</li>
+                            <li>Vibe Coding</li>
+                            <li>Minecraft</li>
+                        </ul>
+                    </section>
+                    <section class="bento-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#chat"></use></svg>Connect</h2>
+                        <ul class="contact-list">
+                            <li><a href="mailto:i@henry.city"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#mail"></use></svg>i@henry.city</a></li>
+                            <li><a href="https://x.com/HenryWHU_"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg>@HenryWHU_</a></li>
+                            <li><a href="https://t.me/AYoungUser"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#chat"></use></svg>AaronMoreau · Telegram</a></li>
+                            <li><a href="https://github.com/HenryWHU0503"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#code"></use></svg>GitHub</a></li>
+                        </ul>
+                    </section>
+                    <section class="bento-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#code"></use></svg>Open Source</h2>
+                        <p class="card-copy">The source code for this website is available on GitHub.</p>
+                        <div class="card-actions"><a class="action-link" href="https://github.com/HenryWHU0503/Bento-Like-Personal-Website" target="_blank" rel="noopener noreferrer">Browse the repository<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a></div>
+                    </section>
+                    <section class="bento-card">
+                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#mail"></use></svg>Get in Touch</h2>
+                        <p class="card-copy">Interested in working together? Let’s chat.</p>
+                        <div class="card-actions"><a class="action-link" href="mailto:me@henrywhu.cn">Email me<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#arrow"></use></svg></a></div>
+                    </section>
+                </div>
+            </main>
+            <footer class="site-footer">
+                <p>© 2024–2026 Henry Moreau</p>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">Chongqing ICP No. 2024036203</a>
+            </footer>
         </div>
-        </div>
-
-        <!-- 主要内容区 -->
-        <main class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            <!-- 大型卡片 -->
-            <div class="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-2 p-6 rounded-2xl hover:shadow-lg transition-all"">
-                <h2 class="text-xl font-bold mb-4">
-                    <i class="fa-solid fa-diagram-project mr-2 text-primary" aria-hidden="true"></i>Featured Project: Navigation for CDUTCM
-                </h2>
-                <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
-                    <img src="../asset/nav.png" alt="Navigation for CDUTCM" class="w-full h-full object-cover">
-                </div>
-                <p class="text-muted mb-4 flex-grow">
-                    Written in <i class="fa-brands fa-vuejs ml-1" aria-hidden="true"></i>Vue.js, open in WeChat can get quick auto-login to correspondent webside of CDUTCM, providing a fast and responsive navigation experience.
-                </p>
-                <p>
-                    <a href="https://nav.henry.city/" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-chrome ml-1" aria-hidden="true"></i>Visit
-                    </a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-github ml-1" aria-hidden="true"></i>View Source Code
-                    </a>
-                </p>
-            </div>
-            <div class="bento-card col-span-1 md:col-span-2 lg:col-span-2 row-span-2 p-6 rounded-2xl hover:shadow-lg transition-all"">
-                <h2 class="text-xl font-bold mb-4">
-                    <i class="fa-solid fa-rocket mr-2 text-primary" aria-hidden="true"></i>Mobile IDE
-                </h2>
-                <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
-                    <img src="../asset/ide.png" alt="Mobile IDE" class="w-full h-full object-cover">
-                </div>
-                <p class="text-muted mb-4 flex-grow">
-                    Written in <i class="fa-brands fa-react ml-1" aria-hidden="true"></i>React.js, containing code completion and preview features, providing a better development experience for mobile devices.
-                </p>
-                <p>
-                    <a href="https://ide.henry.city/" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-chrome ml-1" aria-hidden="true"></i>Visit
-                    </a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="#" class="inline-flex items-center text-primary font-medium" style="color: gray">
-                        <i class="fa-brands fa-github ml-1" aria-hidden="true"></i>Not Available
-                    </a>
-                </p>
-            </div>
-
-            <!-- 中等卡片 - 技能 -->
-            <div class="bento-card p-6 rounded-2xl hover:shadow-lg transition-all">
-                <h2 class="text-xl font-bold mb-4">Skills & Hibbies</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full text-sm">UI/UX Design</span>
-                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full text-sm">AI</span>
-                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full text-sm">Site Development</span>
-                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full text-sm">Vibe Coding</span>
-                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 dark:text-white text-gray-800 rounded-full text-sm">Minecraft</span>
-                </div>
-            </div>
-
-            <!-- 小卡片 - 社交媒体 -->
-            <div class="bento-card p-6 rounded-2xl hover:shadow-lg transition-all">
-                <h2 class="text-xl font-bold mb-4">Connect</h2>
-                <div class="space-y-3">
-                    <a href="mailto:i@henry.city" class="flex items-center text-muted hover:text-primary transition-colors">
-                        <i class="fa-solid fa-envelope w-6" aria-hidden="true"></i>
-                        <span>i@henry.city</span>
-                    </a>
-                    <a href="https://x.com/HenryWHU_" class="flex items-center text-muted hover:text-primary transition-colors">
-                        <i class="fa-brands fa-x-twitter w-6" aria-hidden="true"></i>
-                        <span>@HenryWHU_</span>
-                    </a>
-                    <a href="https://t.me/AYoungUser" class="flex items-center text-muted hover:text-primary transition-colors">
-                        <i class="fa-brands fa-telegram w-6" aria-hidden="true"></i>
-                        <span>AaronMoreau</span>
-                    </a>
-                    <a href="htts://github.com/HenryMoreau" class="flex items-center text-muted hover:text-primary transition-colors">
-                        <i class="fa-brands fa-github w-6" aria-hidden="true"></i>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- 中卡片 - 开源信息 -->
-            <div class="bento-card lg:col-span-2 p-6 rounded-2xl hover:shadow-lg transition-all">
-                <h2 class="text-xl font-bold mb-4">Open Source</h2>
-                <p class="text-muted mb-4">The Source Code of webiste has uploaded to 
-                    <br><i class="fa-brands fa-square-github w-6" aria-hidden="true"></i><a href="https://github.com/HenryWHU0503/Bento-Like-Personal-Website" target="_blank" style="color: #007bff;">HenryWHU0503/Bento-Like-Personal-Website</a>
-                    <br>Anticipating your trials.<b>:D</b>
-                </p>
-            </div>
-
-            <!-- 小卡片 - 联系方式 -->
-            <div class="bento-card p-6 rounded-2xl hover:shadow-lg transition-all">
-                <h2 class="text-xl font-bold mb-4">Get In Touch</h2>
-                <p class="text-muted mb-4">Interested in working together? Let's chat.</p>
-                <a href="mailto:me@henrywhu.cn" class="inline-flex items-center justify-center w-full py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-                    <i class="fa-solid fa-paper-plane mr-2" aria-hidden="true"></i>
-                    <span>Email Me</span>
-                </a>
-            </div>
-        </main>
-
-        <!-- 页脚 -->
-        <footer class="text-center text-muted py-4">
-            <p><a href="https://beian.miit.gov.cn/" target="_blank">Chongqing ICP No.2024036203<br>Protect by Ministy of Industry and Technology P.R.C.</a><br>&copy; 2024-2026 Henry Moreau. All rights reserved.</p>
-        </footer>
     </div>
-
-    <script src="../asset/script.js"></script>
 </body>
 </html>
