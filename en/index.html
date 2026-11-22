@@ -8,6 +8,7 @@
     <meta name="description" content="Student, Designer &amp; Developer">
     <link rel="icon" href="../asset/avatar.webp">
     <script src="../asset/theme.js"></script>
+    <link rel="stylesheet" href="../asset/fontawesome/icons.css">
     <link rel="stylesheet" href="../asset/styles.css">
     <script src="../asset/script.js" defer></script>
     <script src="../asset/glass.js" defer></script>
@@ -15,40 +16,47 @@
 <body>
     <a class="skip-link" href="#content">Skip to content</a>
     <div class="site-shell">
-        <aside class="sidebar">
-            <a class="brand" href="index.html">
-                <img src="../asset/avatar.webp" alt="" width="42" height="42">
-                <span class="brand-text"><strong>Henry Moreau</strong></span>
-            </a>
-            <button type="button" class="icon-button menu-toggle" aria-label="More links" aria-controls="nav-extras" aria-expanded="false">
-                <svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#menu"></use></svg>
-            </button>
-            <nav class="site-nav" aria-label="Main navigation">
-                <div class="nav-group nav-primary">
-                    <span class="nav-group-title">Browse</span>
-                    <a class="nav-link" href="index.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#home"></use></svg><span>Home</span></a>
-                    <a class="nav-link" href="../articles.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#articles"></use></svg><span>Articles</span></a>
-                    <a class="nav-link" href="../project/index.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg><span>Projects</span></a>
-                    <a class="nav-link" href="../friends/index.html" hreflang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#friends"></use></svg><span>Friends</span></a>
-                </div>
-                <div class="nav-group nav-extras" id="nav-extras">
-                    <span class="nav-group-title">Explore</span>
-                    <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#blog"></use></svg><span>Blog</span><svg class="icon external-icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
-                    <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#compass"></use></svg><span>Travellings</span><svg class="icon external-icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
-                    <a class="nav-link" href="../index.html" hreflang="zh-CN" lang="zh-CN"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#language"></use></svg><span>简体中文</span></a>
-                </div>
-            </nav>
-            <div class="theme-row">
-                <label class="theme-control">
-                    <svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#theme"></use></svg><span>Appearance</span><svg class="icon chevron" aria-hidden="true"><use href="../asset/icons.svg#chevron"></use></svg>
-                    <select id="theme-select" aria-label="Appearance">
-                        <option value="system">Auto</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                    </select>
-                </label>
+        <header class="site-header">
+            <div class="island glass-surface">
+                <a class="brand" href="index.html" aria-label="Henry Moreau">
+                    <img src="../asset/avatar.webp" alt="" width="32" height="32">
+                </a>
+                <nav class="island-nav" aria-label="Main navigation">
+                    <a class="nav-link" href="index.html" aria-current="page"><i class="icon fa-solid fa-house" aria-hidden="true"></i><span>Home</span></a>
+                    <a class="nav-link" href="../articles.html" hreflang="zh-CN"><i class="icon fa-solid fa-newspaper" aria-hidden="true"></i><span>Articles</span></a>
+                    <a class="nav-link" href="../project/index.html" hreflang="zh-CN"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i><span>Projects</span></a>
+                    <a class="nav-link" href="../friends/index.html" hreflang="zh-CN"><i class="icon fa-solid fa-user-group" aria-hidden="true"></i><span>Friends</span></a>
+                </nav>
+                <details class="island-popover">
+                    <summary class="island-control" aria-label="More links" title="More links"><i class="icon fa-solid fa-ellipsis" aria-hidden="true"></i></summary>
+                    <nav class="island-panel glass-surface more-panel" aria-label="More links">
+                        <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-pen-fancy" aria-hidden="true"></i><span>Blog</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-bus" aria-hidden="true"></i><span>Travellings</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="../index.html" hreflang="zh-CN" lang="zh-CN"><i class="icon fa-solid fa-globe" aria-hidden="true"></i><span>简体中文</span></a>
+                    </nav>
+                </details>
+                <details class="island-popover theme-picker" hidden>
+                    <summary class="island-control" aria-label="Appearance" title="Appearance"><i class="icon fa-solid fa-circle-half-stroke" aria-hidden="true"></i></summary>
+                    <div class="island-panel glass-surface theme-panel">
+                        <fieldset>
+                            <legend>Appearance</legend>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="system" checked>
+                                <span><i class="icon fa-solid fa-desktop" aria-hidden="true"></i>System<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="light">
+                                <span><i class="icon fa-solid fa-sun" aria-hidden="true"></i>Light<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="dark">
+                                <span><i class="icon fa-solid fa-moon" aria-hidden="true"></i>Dark<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </details>
             </div>
-        </aside>
+        </header>
 
         <div class="content">
             <main id="content" tabindex="-1">
@@ -59,28 +67,28 @@
 
                 <div class="bento-grid project-grid">
                     <article class="bento-card project-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg>CDUTCM Navigation</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i>CDUTCM Navigation</h2>
                         <div class="project-media">
                             <img src="../asset/nav.png" width="668" height="502" alt="CDUTCM Navigation screenshot" decoding="async">
                         </div>
                         <p class="card-copy">Built with Vue.js. Opening it in WeChat supports quick sign-in to CDUTCM services.</p>
                         <div class="card-actions">
-                            <a class="action-link" href="https://nav.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
-                            <a class="action-link" href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" rel="noopener noreferrer">View source<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                            <a class="action-link" href="https://nav.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            <a class="action-link" href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" rel="noopener noreferrer">View source<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <article class="bento-card project-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#projects"></use></svg>Mobile IDE</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i>Mobile IDE</h2>
                         <div class="project-media">
                             <img src="../asset/ide.png" width="1441" height="1080" alt="Mobile IDE screenshot" decoding="async">
                         </div>
                         <p class="card-copy">Built with React.js, with code completion and live preview for mobile development.</p>
                         <div class="card-actions">
-                            <a class="action-link" href="https://ide.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a>
+                            <a class="action-link" href="https://ide.henry.city/" target="_blank" rel="noopener noreferrer">Visit website<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
                         </div>
                     </article>
                     <section class="bento-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#tags"></use></svg>Skills &amp; Hobbies</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-tags" aria-hidden="true"></i>Skills &amp; Hobbies</h2>
                         <ul class="chip-list">
                             <li>UI/UX Design</li>
                             <li>AI</li>
@@ -90,23 +98,23 @@
                         </ul>
                     </section>
                     <section class="bento-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#chat"></use></svg>Connect</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-comments" aria-hidden="true"></i>Connect</h2>
                         <ul class="contact-list">
-                            <li><a href="mailto:i@henry.city"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#mail"></use></svg>i@henry.city</a></li>
-                            <li><a href="https://x.com/HenryWHU_"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg>@HenryWHU_</a></li>
-                            <li><a href="https://t.me/AYoungUser"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#chat"></use></svg>AaronMoreau · Telegram</a></li>
-                            <li><a href="https://github.com/HenryWHU0503"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#code"></use></svg>GitHub</a></li>
+                            <li><a href="mailto:i@henry.city"><i class="icon fa-solid fa-envelope" aria-hidden="true"></i>i@henry.city</a></li>
+                            <li><a href="https://x.com/HenryWHU_"><i class="icon fa-brands fa-x-twitter" aria-hidden="true"></i>@HenryWHU_</a></li>
+                            <li><a href="https://t.me/AYoungUser"><i class="icon fa-brands fa-telegram" aria-hidden="true"></i>AaronMoreau · Telegram</a></li>
+                            <li><a href="https://github.com/HenryWHU0503"><i class="icon fa-brands fa-github" aria-hidden="true"></i>GitHub</a></li>
                         </ul>
                     </section>
                     <section class="bento-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#code"></use></svg>Open Source</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-code" aria-hidden="true"></i>Open Source</h2>
                         <p class="card-copy">The source code for this website is available on GitHub.</p>
-                        <div class="card-actions"><a class="action-link" href="https://github.com/HenryWHU0503/Bento-Like-Personal-Website" target="_blank" rel="noopener noreferrer">Browse the repository<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#external"></use></svg></a></div>
+                        <div class="card-actions"><a class="action-link" href="https://github.com/HenryWHU0503/Bento-Like-Personal-Website" target="_blank" rel="noopener noreferrer">Browse the repository<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
                     </section>
                     <section class="bento-card">
-                        <h2 class="card-title"><svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#mail"></use></svg>Get in Touch</h2>
+                        <h2 class="card-title"><i class="icon fa-solid fa-envelope" aria-hidden="true"></i>Get in Touch</h2>
                         <p class="card-copy">Interested in working together? Let’s chat.</p>
-                        <div class="card-actions"><a class="action-link" href="mailto:me@henrywhu.cn">Email me<svg class="icon" aria-hidden="true"><use href="../asset/icons.svg#arrow"></use></svg></a></div>
+                        <div class="card-actions"><a class="action-link" href="mailto:me@henrywhu.cn">Email me<i class="icon fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
                     </section>
                 </div>
             </main>

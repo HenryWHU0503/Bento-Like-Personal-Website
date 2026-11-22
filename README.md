@@ -24,6 +24,8 @@ I am a student, and I want to have a personal website to show my projects. I fou
 
 ## Liquid Glass
 
-本站可直接部署为静态页面。液态玻璃以 CSS 半透明材质、高光和模糊为基础。桌面 Chromium 会为可见卡片生成局部 SVG 位移图，使背景光线沿圆角弯折。Safari、Firefox 和移动端使用兼容的玻璃效果。折射思路参考 [archisvaze/liquid-glass](https://github.com/archisvaze/liquid-glass)。
+顶部浮动导航、主题菜单和 Bento 卡片共享同一套玻璃材质。支持 SVG 背景滤镜的 Chromium 会按可见组件的尺寸生成位移图，沿圆角折射并放大背景。其他浏览器使用半透明材质、模糊和边缘高光。折射思路参考 [archisvaze/liquid-glass](https://github.com/archisvaze/liquid-glass) 和 [Liquid Glass in the Browser](https://kube.io/blog/liquid-glass-css-svg/)。
 
-在仓库目录运行 `python -m http.server 8000`，打开 `http://localhost:8000` 预览。导航、样式、图标及主题切换均由本地文件提供。
+图标使用 [Font Awesome Free 7.0.0](https://github.com/FortAwesome/Font-Awesome/tree/7.0.0) 的 Solid 和 Brands 字形。网站本地托管了所用字形的子集，许可证见 [asset/fontawesome/LICENSE.txt](asset/fontawesome/LICENSE.txt)。
+
+在仓库目录运行 `python -m http.server 8000`，打开 `http://localhost:8000` 预览。

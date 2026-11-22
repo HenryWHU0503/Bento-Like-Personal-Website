@@ -1,5 +1,5 @@
-// Edge normals bend the backdrop towards the interior of each rounded card.
-const chromium = /Chrom(?:e|ium)\//.test(navigator.userAgent) && !/Android/.test(navigator.userAgent);
+// A convex bezel bends the backdrop at the edge, with a mild magnification across the face.
+const chromium = /Chrom(?:e|ium)\//.test(navigator.userAgent);
 if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObserver !== 'undefined' &&
     CSS.supports('backdrop-filter', 'url(#glass)')) {
     const svgNS = 'http://www.w3.org/2000/svg';
@@ -12,8 +12,8 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
 
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
-    const maximumSize = 280;
-    const displacement = 42;
+    const maximumSize = 360;
+    const displacement = 104;
     const maps = new Map();
     let nextFilter = 0;
 
@@ -25,7 +25,13 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
         canvas.width = Math.ceil(width * ratio);
         canvas.height = Math.ceil(height * ratio);
         const pixels = context.createImageData(canvas.width, canvas.height);
-        const rim = radius * 0.88;
+        const rim = Math.min(32, radius * 1.06);
+        const edgeStrength = Math.min(39, rim * 1.32);
+        const mapScale = 255 / displacement;
+
+        function encode(offset) {
+            return 128 + offset * mapScale;
+        }
 
         for (let row = 0; row < canvas.height; row++) {
             const y = (row + 0.5) * height / canvas.height;
@@ -36,11 +42,13 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
                 const normalX = x - Math.min(width - radius, Math.max(radius, x));
                 const length = Math.hypot(normalX, normalY);
                 const depth = Math.max(0, radius - length);
-                const bend = length && depth < rim ? 120 * (1 - depth / rim) ** 2 / length : 0;
+                const bevel = length && depth < rim ? edgeStrength * (1 - depth / rim) ** 1.65 / length : 0;
+                const zoomX = (width / 2 - x) * .022;
+                const zoomY = (height / 2 - y) * .022;
                 const i = (row * canvas.width + column) * 4;
 
-                pixels.data[i] = 128 - normalX * bend;
-                pixels.data[i + 1] = 128 - normalY * bend;
+                pixels.data[i] = encode(zoomX - normalX * bevel);
+                pixels.data[i + 1] = encode(zoomY - normalY * bevel);
                 pixels.data[i + 2] = 128;
                 pixels.data[i + 3] = 255;
             }
@@ -67,6 +75,9 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
             const refraction = document.createElementNS(svgNS, 'feDisplacementMap');
             filter.id = `glass-${nextFilter++}`;
             filter.setAttribute('color-interpolation-filters', 'sRGB');
+            filter.setAttribute('filterUnits', 'userSpaceOnUse');
+            filter.setAttribute('x', '0');
+            filter.setAttribute('y', '0');
             image.setAttribute('result', 'edgeMap');
             image.setAttribute('preserveAspectRatio', 'none');
             refraction.setAttribute('in', 'SourceGraphic');
@@ -82,6 +93,8 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
 
         const corner = parseFloat(getComputedStyle(card).borderTopLeftRadius);
         const radius = Math.round(Math.min(corner, width / 2, height / 2));
+        entry.filter.setAttribute('width', width);
+        entry.filter.setAttribute('height', height);
         entry.image.setAttribute('width', width);
         entry.image.setAttribute('height', height);
         entry.image.setAttribute('href', edgeMap(width, height, radius));
@@ -107,6 +120,6 @@ if (chromium && typeof ResizeObserver !== 'undefined' && typeof IntersectionObse
             }
         }, { rootMargin: '140px' });
 
-        for (const card of document.querySelectorAll('.bento-card')) visible.observe(card);
+        for (const card of document.querySelectorAll('.bento-card, .glass-surface')) visible.observe(card);
     }
 }

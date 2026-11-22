@@ -8,6 +8,7 @@
     <meta name="description" content="探索我的思考、笔记和创作">
     <link rel="icon" href="asset/avatar.webp">
     <script src="asset/theme.js"></script>
+    <link rel="stylesheet" href="asset/fontawesome/icons.css">
     <link rel="stylesheet" href="asset/styles.css">
     <script src="asset/script.js" defer></script>
     <script src="asset/glass.js" defer></script>
@@ -15,40 +16,47 @@
 <body>
     <a class="skip-link" href="#content">跳转到内容</a>
     <div class="site-shell">
-        <aside class="sidebar">
-            <a class="brand" href="index.html">
-                <img src="asset/avatar.webp" alt="" width="42" height="42">
-                <span class="brand-text"><strong>小胡同学</strong><small>Henry Hu</small></span>
-            </a>
-            <button type="button" class="icon-button menu-toggle" aria-label="更多链接" aria-controls="nav-extras" aria-expanded="false">
-                <svg class="icon" aria-hidden="true"><use href="asset/icons.svg#menu"></use></svg>
-            </button>
-            <nav class="site-nav" aria-label="主导航">
-                <div class="nav-group nav-primary">
-                    <span class="nav-group-title">浏览</span>
-                    <a class="nav-link" href="index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#home"></use></svg><span>主页</span></a>
-                    <a class="nav-link" href="articles.html" aria-current="page"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#articles"></use></svg><span>文章</span></a>
-                    <a class="nav-link" href="project/index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#projects"></use></svg><span>项目</span></a>
-                    <a class="nav-link" href="friends/index.html"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#friends"></use></svg><span>友友们</span></a>
-                </div>
-                <div class="nav-group nav-extras" id="nav-extras">
-                    <span class="nav-group-title">更多</span>
-                    <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#blog"></use></svg><span>博客</span><svg class="icon external-icon" aria-hidden="true"><use href="asset/icons.svg#external"></use></svg></a>
-                    <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#compass"></use></svg><span>开往</span><svg class="icon external-icon" aria-hidden="true"><use href="asset/icons.svg#external"></use></svg></a>
-                    <a class="nav-link" href="en/index.html" hreflang="en" lang="en"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#language"></use></svg><span>English</span></a>
-                </div>
-            </nav>
-            <div class="theme-row">
-                <label class="theme-control">
-                    <svg class="icon" aria-hidden="true"><use href="asset/icons.svg#theme"></use></svg><span>外观</span><svg class="icon chevron" aria-hidden="true"><use href="asset/icons.svg#chevron"></use></svg>
-                    <select id="theme-select" aria-label="外观">
-                        <option value="system">自动</option>
-                        <option value="light">浅色</option>
-                        <option value="dark">深色</option>
-                    </select>
-                </label>
+        <header class="site-header">
+            <div class="island glass-surface">
+                <a class="brand" href="index.html" aria-label="小胡同学">
+                    <img src="asset/avatar.webp" alt="" width="32" height="32">
+                </a>
+                <nav class="island-nav" aria-label="主导航">
+                    <a class="nav-link" href="index.html"><i class="icon fa-solid fa-house" aria-hidden="true"></i><span>主页</span></a>
+                    <a class="nav-link" href="articles.html" aria-current="page"><i class="icon fa-solid fa-newspaper" aria-hidden="true"></i><span>文章</span></a>
+                    <a class="nav-link" href="project/index.html"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i><span>项目</span></a>
+                    <a class="nav-link" href="friends/index.html"><i class="icon fa-solid fa-user-group" aria-hidden="true"></i><span>友友们</span></a>
+                </nav>
+                <details class="island-popover">
+                    <summary class="island-control" aria-label="更多链接" title="更多链接"><i class="icon fa-solid fa-ellipsis" aria-hidden="true"></i></summary>
+                    <nav class="island-panel glass-surface more-panel" aria-label="更多链接">
+                        <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-pen-fancy" aria-hidden="true"></i><span>博客</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-bus" aria-hidden="true"></i><span>开往</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="en/index.html" hreflang="en" lang="en"><i class="icon fa-solid fa-globe" aria-hidden="true"></i><span>English</span></a>
+                    </nav>
+                </details>
+                <details class="island-popover theme-picker" hidden>
+                    <summary class="island-control" aria-label="外观" title="外观"><i class="icon fa-solid fa-circle-half-stroke" aria-hidden="true"></i></summary>
+                    <div class="island-panel glass-surface theme-panel">
+                        <fieldset>
+                            <legend>外观</legend>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="system" checked>
+                                <span><i class="icon fa-solid fa-desktop" aria-hidden="true"></i>跟随系统<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="light">
+                                <span><i class="icon fa-solid fa-sun" aria-hidden="true"></i>浅色<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="dark">
+                                <span><i class="icon fa-solid fa-moon" aria-hidden="true"></i>深色<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </details>
             </div>
-        </aside>
+        </header>
 
         <div class="content">
             <main id="content" tabindex="-1">
@@ -60,8 +68,8 @@
                 <form class="article-search" id="article-search" role="search" hidden>
                     <label class="visually-hidden" for="search-input">搜索文章</label>
                     <input id="search-input" type="search" placeholder="搜索文章标题或简介" autocomplete="off" aria-controls="articles-list">
-                    <button class="icon-button" type="button" id="clear-search" aria-label="清空搜索" hidden><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#close"></use></svg></button>
-                    <button class="icon-button" type="submit" aria-label="搜索"><svg class="icon" aria-hidden="true"><use href="asset/icons.svg#search"></use></svg></button>
+                    <button class="icon-button" type="button" id="clear-search" aria-label="清空搜索" hidden><i class="icon fa-solid fa-xmark" aria-hidden="true"></i></button>
+                    <button class="icon-button" type="submit" aria-label="搜索"><i class="icon fa-solid fa-magnifying-glass" aria-hidden="true"></i></button>
                 </form>
                 <div class="bento-grid" id="articles-list">
                     <a class="bento-card article-item" href="https://blog.henrywhu.cn/post/1year-anniversary/">

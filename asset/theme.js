@@ -17,17 +17,21 @@
     applyTheme();
     system.addEventListener('change', applyTheme);
     document.addEventListener('DOMContentLoaded', () => {
-        const select = document.getElementById('theme-select');
-        select.value = preference;
-        select.addEventListener('change', () => {
-            preference = select.value;
-            applyTheme();
-            try {
-                if (preference === 'system') localStorage.removeItem('theme');
-                else localStorage.setItem('theme', preference);
-            } catch {
-                // Keep the selection for this page when storage is unavailable.
-            }
-        });
+        const picker = document.querySelector('.theme-picker');
+        for (const option of picker.querySelectorAll('input[name="appearance"]')) {
+            option.checked = option.value === preference;
+            option.addEventListener('change', () => {
+                if (!option.checked) return;
+                preference = option.value;
+                applyTheme();
+                try {
+                    if (preference === 'system') localStorage.removeItem('theme');
+                    else localStorage.setItem('theme', preference);
+                } catch {
+                    // Keep the selection for this page when storage is unavailable.
+                }
+            });
+        }
+        picker.hidden = false;
     });
 })();

@@ -1,27 +1,26 @@
-const menuToggle = document.querySelector('.menu-toggle');
-const sidebar = document.querySelector('.sidebar');
-const wideLayout = matchMedia('(min-width: 760px)');
+const popovers = Array.from(document.querySelectorAll('.island-popover'));
 
-function setMenu(open) {
-    menuToggle.setAttribute('aria-expanded', String(open));
-    sidebar.classList.toggle('is-open', open);
+for (const popover of popovers) {
+    popover.addEventListener('toggle', () => {
+        if (!popover.open) return;
+        for (const other of popovers) {
+            if (other !== popover) other.open = false;
+        }
+    });
 }
 
-sidebar.classList.add('has-menu-toggle');
-
-menuToggle.addEventListener('click', () => {
-    setMenu(menuToggle.getAttribute('aria-expanded') === 'false');
-});
-wideLayout.addEventListener('change', () => setMenu(false));
-
-document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
-        setMenu(false);
-        menuToggle.focus();
+document.addEventListener('click', event => {
+    for (const popover of popovers) {
+        if (!popover.contains(event.target)) popover.open = false;
     }
 });
-document.addEventListener('click', event => {
-    if (!sidebar.contains(event.target)) setMenu(false);
+
+document.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    const opened = popovers.find(popover => popover.open);
+    if (!opened) return;
+    opened.open = false;
+    opened.querySelector('summary').focus();
 });
 
 const qrDialog = document.getElementById('wechat-dialog');
@@ -75,7 +74,7 @@ if (searchForm) {
 }
 
 const precisePointer = matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
-for (const card of document.querySelectorAll('.bento-card')) {
+for (const card of document.querySelectorAll('.bento-card, .glass-surface')) {
     card.addEventListener('pointermove', event => {
         if (!precisePointer.matches || event.pointerType === 'touch') return;
         const bounds = card.getBoundingClientRect();
