@@ -1,121 +1,99 @@
-<!DOCTYPE html>
-<html lang="zh-cn" class="light">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
     <title>我的项目 | 小胡同学</title>
-    <!-- 引入Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入网页头像 -->
-    <link rel="icon" href="../asset/小胡透明.png">
-    <!-- 引入Font Awesome -->
-    <link href="https://lib.baomitu.com/font-awesome/7.0.0/css/all.min.css" rel="stylesheet">
-    <!-- 引入Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- 引入自定义样式 -->
+    <meta name="description" content="我做过和正在做的项目">
+    <link rel="icon" href="../asset/avatar.webp">
+    <script src="../asset/theme.js"></script>
+    <link rel="stylesheet" href="../asset/fontawesome/icons.css">
     <link rel="stylesheet" href="../asset/styles.css">
+    <script src="../asset/script.js" defer></script>
+    <script src="../asset/glass.js" defer></script>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 顶部和菜单固定区域 -->
-        <div class="header-menu-wrapper">
-            <!-- 顶部区域 -->
-            <header class="mb-8 flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center mb-4 md:mb-0">
-                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary mr-4">
-                    <img src="../asset/小胡.png" alt="Profile picture" class="w-full h-full object-cover">
-                </div>
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-bold">小胡同学</h1>
-                    <p class="text-muted">在喜欢的事情里反复横跳的斜杠学生</p>
-                </div>
+    <a class="skip-link" href="#content">跳转到内容</a>
+    <div class="site-shell">
+        <header class="site-header">
+            <div class="island glass-surface">
+                <a class="brand" href="../index.html" aria-label="小胡同学">
+                    <img src="../asset/avatar.webp" alt="" width="32" height="32">
+                </a>
+                <nav class="island-nav" aria-label="主导航">
+                    <a class="nav-link" href="../index.html"><i class="icon fa-solid fa-house" aria-hidden="true"></i><span>主页</span></a>
+                    <a class="nav-link" href="../articles.html"><i class="icon fa-solid fa-newspaper" aria-hidden="true"></i><span>文章</span></a>
+                    <a class="nav-link" href="../project/index.html" aria-current="page"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i><span>项目</span></a>
+                    <a class="nav-link" href="../friends/index.html"><i class="icon fa-solid fa-user-group" aria-hidden="true"></i><span>友友们</span></a>
+                </nav>
+                <details class="island-popover">
+                    <summary class="island-control" aria-label="更多链接" title="更多链接"><i class="icon fa-solid fa-ellipsis" aria-hidden="true"></i></summary>
+                    <nav class="island-panel glass-surface more-panel" aria-label="更多链接">
+                        <a class="nav-link" href="https://blog.henrywhu.cn/" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-pen-fancy" aria-hidden="true"></i><span>博客</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="https://travellings.cn/go.html" target="_blank" rel="noopener noreferrer"><i class="icon fa-solid fa-bus" aria-hidden="true"></i><span>开往</span><i class="icon fa-solid fa-arrow-up-right-from-square external-icon" aria-hidden="true"></i></a>
+                        <a class="nav-link" href="../en/index.html" hreflang="en" lang="en"><i class="icon fa-solid fa-globe" aria-hidden="true"></i><span>English</span></a>
+                    </nav>
+                </details>
+                <details class="island-popover theme-picker" hidden>
+                    <summary class="island-control" aria-label="外观" title="外观"><i class="icon fa-solid fa-circle-half-stroke" aria-hidden="true"></i></summary>
+                    <div class="island-panel glass-surface theme-panel">
+                        <fieldset>
+                            <legend>外观</legend>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="system" checked>
+                                <span><i class="icon fa-solid fa-desktop" aria-hidden="true"></i>跟随系统<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="light">
+                                <span><i class="icon fa-solid fa-sun" aria-hidden="true"></i>浅色<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                            <label class="theme-option">
+                                <input class="visually-hidden" type="radio" name="appearance" value="dark">
+                                <span><i class="icon fa-solid fa-moon" aria-hidden="true"></i>深色<i class="icon fa-solid fa-check theme-check" aria-hidden="true"></i></span>
+                            </label>
+                        </fieldset>
+                    </div>
+                </details>
             </div>
-            <button id="theme-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800 transition-colors">
-                <i class="fa-solid fa-moon dark:hidden text-gray-800 text-sm" aria-hidden="true"></i>
-                <i class="fa-solid fa-sun dark:inline-block text-gray-800 text-sm" aria-hidden="true"></i>    
-            </button>
         </header>
 
-        <!-- 菜单区域 -->
-        <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8" id="menu">
-            <a href="../index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-home mr-2" aria-hidden="true"></i>
-                <span>主页</span>
-            </a>
-            <a href="../friends/index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-link mr-2" aria-hidden="true"></i>
-                <span>友友们</span>
-            </a>
-            <a href="#" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-briefcase mr-2" aria-hidden="true"></i>
-                <span>项目</span>
-            </a>
-            <a href="../blog/index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-pen-fancy mr-2" aria-hidden="true"></i>
-                <span>博客</span>
-            </a>
-            <a href="https://travellings.cn/go.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all" target="_blank">
-                <i class="fa-solid fa-bus mr-2" aria-hidden="true"></i>
-                <span>开往</span>
-            </a>
-            <a href="../en/index.html" class="menu-item flex items-center justify-center p-4 rounded-xl hover:shadow-md transition-all">
-                <i class="fa-solid fa-globe mr-2" aria-hidden="true"></i>
-                <span>English</span>
-            </a>
-        </div>
-        </div>
+        <div class="content">
+            <main id="content" tabindex="-1">
+                <header class="page-heading">
+                    <h1>我的项目</h1>
+                    <p>我做过和正在做的项目</p>
+                </header>
 
-        <!-- 主要内容区 -->
-        <main class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-            <div class="bento-card p-6 rounded-2xl hover:shadow-lg transition-all flex flex-col">
-                <h2 class="text-xl font-bold mb-4">
-                    <i class="fa-solid fa-window-restore mr-2 text-primary" aria-hidden="true"></i>重点维护项目：成中医导航站
-                </h2>
-                <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
-                    <img src="../asset/nav.png" alt="Navigation for CDUTCM" class="w-full h-full object-cover">
+                <div class="bento-grid project-grid">
+                    <article class="bento-card project-card">
+                        <h2 class="card-title"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i>成中医导航站</h2>
+                        <div class="project-media">
+                            <img src="../asset/nav.png" width="668" height="502" alt="成中医导航站界面截图" decoding="async">
+                        </div>
+                        <p class="card-copy">使用 Vue.js 开发。从微信访问时可以自动登录到对应的成中医功能网站，减少打开公众号、登录账号等重复操作。</p>
+                        <div class="card-actions">
+                            <a class="action-link" href="https://nav.henry.city/" target="_blank" rel="noopener noreferrer">访问网站<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            <a class="action-link" href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" rel="noopener noreferrer">查看源代码<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+                    <article class="bento-card project-card">
+                        <h2 class="card-title"><i class="icon fa-solid fa-briefcase" aria-hidden="true"></i>Mobile IDE</h2>
+                        <div class="project-media">
+                            <img src="../asset/ide.png" width="1441" height="1080" alt="Mobile IDE界面截图" decoding="async">
+                        </div>
+                        <p class="card-copy">使用 React.js 开发，带有代码补全和预览功能，可以在手机上快速编写和预览代码。</p>
+                        <div class="card-actions">
+                            <a class="action-link" href="https://ide.henry.city/" target="_blank" rel="noopener noreferrer">访问网站<i class="icon fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
                 </div>
-                <p class="text-muted mb-4 flex-grow">
-                    使用 <i class="fa-brands fa-vuejs ml-1" aria-hidden="true"></i>Vue.js 所写，从微信访问时可以自动登录到对应成中医功能网站，减少打开公众号、登录账号等复杂操作，减少重复工序，提供快速、高效率的导航体验。
-                </p>
-                <p>
-                    <a href="https://nav.henry.city/" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-chrome ml-1" aria-hidden="true"></i>访问网站
-                    </a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="https://github.com/HenryWHU0503/cdutcm-nav" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-github ml-1" aria-hidden="true"></i>查看源代码
-                    </a>
-                </p>
-            </div>
-            <div class="bento-card p-6 rounded-2xl hover:shadow-lg transition-all flex flex-col">
-                <h2 class="text-xl font-bold mb-4">
-                    <i class="fa-brands fa-dev mr-2 text-primary" aria-hidden="true"></i>Mobile IDE
-                </h2>
-                <div class="rounded-xl overflow-hidden aspect-[4/3] mb-4">
-                    <img src="../asset/ide.png" alt="Mobile IDE" class="w-full h-full object-cover">
-                </div>
-                <p class="text-muted mb-4 flex-grow">
-                    使用 <i class="fa-brands fa-react ml-1" aria-hidden="true"></i>React.js 所写，旨在方便用户在空间相对局促的手机界面下快速完成代码编写和预览，带有代码补全、预览等功能，提供快速、高效率的移动应用开发体验。
-                </p>
-                <p>
-                    <a href="https://ide.henry.city/" target="_blank" class="inline-flex items-center text-primary font-medium">
-                        <i class="fa-brands fa-chrome ml-1" aria-hidden="true"></i>访问网站
-                    </a>
-                    &nbsp;&nbsp;&nbsp;
-                    <a href="#" class="inline-flex items-center text-primary font-medium" style="color: gray">
-                        <i class="fa-brands fa-github ml-1" aria-hidden="true"></i>暂未开放
-                    </a>
-                </p>
-            </div>
-        </main>
-
-        <!-- 页脚 -->
-        <footer class="text-center text-muted py-4">
-            <p><a href="https://beian.miit.gov.cn/" target="_blank">渝ICP备2024036203号</a><br>&copy; 2024-2026 Henry Hu. All rights reserved.</p>
-        </footer>
+            </main>
+            <footer class="site-footer">
+                <p>© 2024–2026 Henry Hu</p>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">渝ICP备2024036203号</a>
+            </footer>
+        </div>
     </div>
-
-    <!-- 引入自定义脚本 -->
-    <script src="../asset/script.js"></script>
 </body>
 </html>
